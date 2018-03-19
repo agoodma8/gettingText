@@ -1,16 +1,16 @@
-/b# README #\b
+b# README #
 
 Hello this is our first file for CSE350 team project. 
 This is our second commit.
 
 To use this document, you need a Java IDE to run the project. 
 
-/b###What is this repository for? ### \b
+###What is this repository for? ### 
 *Quick summary
 *Version
 *
 
-/b### How do I get set up? ### \b
+### How do I get set up? ### 
 * Summary of set up
 *Configuration
 *Dependancies
@@ -18,7 +18,7 @@ To use this document, you need a Java IDE to run the project.
 *How to run tests
 *Deployment instructions
 
-/bContirbution guidelines ###\b
+Contirbution guidelines ###
 *Writing tests
 *Code review
 * Other guildelines
