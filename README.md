@@ -5,7 +5,7 @@ This is our second commit.
 
 To use this document, you need a Java IDE to run the project. 
 
-###What is this repository for? ### 
+### What is this repository for? ### 
 *Quick summary
 *Version
 *
@@ -18,7 +18,7 @@ To use this document, you need a Java IDE to run the project.
 *How to run tests
 *Deployment instructions
 
-###Contirbution guidelines ###
+### Contirbution guidelines ###
 *Writing tests
 *Code review
 *Other guildelines
