@@ -31,7 +31,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.Color;
 import javax.swing.SwingConstants;
 
-public class gettingText {
+public class gettingText1 {
 
 	private JFrame frame;
 	final JFileChooser inputChooser = new JFileChooser();
@@ -46,7 +46,7 @@ public class gettingText {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					gettingText window = new gettingText();
+					gettingText1 window = new gettingText1();
 					window.frame.setVisible(true);
 		
 				} catch (Exception e) {
@@ -59,10 +59,9 @@ public class gettingText {
 	/**
 	 * Create the application.
 	 */
-	public gettingText() {
+	public gettingText1() {
 		initialize();
 	}
-
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -71,7 +70,8 @@ public class gettingText {
 	frame.setTitle("Text Modifier");
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+		JLabel label1=new JLabel();
+		JLabel label2=new JLabel();
 		//Input File Button
 		Button input = new Button("Select Input File\r\n");
 		input.setSize(20, 50 );
@@ -141,9 +141,9 @@ public class gettingText {
 			            	if(temp != null && (temp.length() + nextWord.length()+1 > max)){
 			            		//buff.append("\n");
 			            		//System.out.print(buff.toString()+ " ");
-			            		writer.newLine();
-			            		writer.write(buff.toString() + " ");
 			            		
+			            		writer.write(buff.toString() + " ");
+			            		writer.newLine();
 			            		buff=new StringBuffer(nextWord);
 			            		temp = buff;
 			            	}
@@ -158,8 +158,8 @@ public class gettingText {
 			            
 			            if (buff.length()>0) {
 			            	//System.out.print(buff.toString() + "\n");
-			            	writer.write(buff.toString() + " ");
-			            	writer.newLine();
+			            	writer.write(buff.toString() + "");
+			            	//writer.newLine();
 			            	buff = new StringBuffer(max);
 			            }
 			            
@@ -236,9 +236,12 @@ textField.setText("Words:   " + words + "        Lines:   "
 		//textField.setFont(new Font("Dialog", Font.PLAIN, 9));
 		//textField.setText("Words:            Lines:          Blank Lines Removed:       "+"\n" + "(Avg Words/Line):     (Avg Line length): ");
 		
-		frame.getContentPane().setLayout(new GridLayout(7,1));
+		frame.getContentPane().setLayout(new GridLayout(9,1));
 		frame.getContentPane().add(input);
+		frame.getContentPane().add(label1);
 		frame.getContentPane().add(output);
+		frame.getContentPane().add(label2);
+		
 		
 		JButton btnNewButton = new JButton("Left Justification");
 		btnNewButton.setSize(50,50);
@@ -256,8 +259,7 @@ textField.setText("Words:   " + words + "        Lines:   "
 		frame.getContentPane().add(btnNewButton);
 		frame.getContentPane().add(format);
 		frame.getContentPane().add(textField);
+	}
+}
 
 		
-	}
-	
-}
