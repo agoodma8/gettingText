@@ -129,16 +129,17 @@ public class gettingText1 {
 				try (Scanner scanner = new Scanner(new File(inputChooser.getSelectedFile().getAbsolutePath()))) {
 					newFile = new File(outputChooser.getSelectedFile().getAbsolutePath());
 					writer = new BufferedWriter(new FileWriter(newFile));
-					int max=80;
+					int max = 80;
+					
 					StringBuffer buff= new StringBuffer(max);
 					StringBuffer temp = null;
 			        while (scanner.hasNextLine()) {	
 			            Scanner sc= new Scanner(scanner.nextLine());
-			            
+			           
 			            while (sc.hasNext()) {
 			            	
 			            	String nextWord = sc.next();
-			            	if(temp != null && (temp.length() + nextWord.length()+1 > max)){
+			            	if(temp != null && (buff.length() + nextWord.length()+1 > max)){
 			            	
 			            		
 			            		writer.write(buff.toString() + " ");
@@ -148,7 +149,7 @@ public class gettingText1 {
 			            	}
 			            	else {
 			            		
-			            		buff.append((buff.length()==0 ? "": "") + nextWord + " ");
+			            		buff.append((buff.length()==0 ? "": " ") + nextWord);
 			            		temp = buff;
 			            		
 			            		
@@ -159,12 +160,12 @@ public class gettingText1 {
 			            
 			            if (buff.length() > 0) {
 			            	
-			            	writer.write(buff.toString() + "");
+			            	writer.write(buff.toString() + " ");
 			            	buff = new StringBuffer(max-temp.length());
 			            }
 			            
-			           sc.close();
 			            
+			            sc.close();
 			        }
 			        
 			        
@@ -173,47 +174,47 @@ public class gettingText1 {
 			        
 			        
 			        
-//This Part is for counting Words + Lines . 
-String line = "", empty = "";
-int words = 0;
-int lines = 0;
-FileReader FReader= new FileReader (inputChooser.getSelectedFile().getAbsolutePath());
-BufferedReader BReader = new BufferedReader (FReader);
-while((line = BReader.readLine())!=null) {
-	empty += line + " ";
-	lines ++ ;
-}
+			        	//This Part is for counting Words + Lines . 
+			        	String line = "", empty = "";
+			        	int words = 0;
+			        	int lines = 0;
+			        	FileReader FReader= new FileReader (inputChooser.getSelectedFile().getAbsolutePath());
+			        	BufferedReader BReader = new BufferedReader (FReader);
+			        	while((line = BReader.readLine())!=null) {
+			        		empty += line + " ";
+			        		lines ++ ;
+			        	}
 
-//System.out.println ("Num of lines"+ lines);
-StringTokenizer STokenizer = new StringTokenizer (empty);
-words = STokenizer.countTokens();
-BReader.close();
-double chars = inputChooser.getSelectedFile().length();
-double Avg_L_L = chars / lines ;
-//System.out.println("Average Length is" + Avg_L_L );
-//System.out.println("Word Counter:" + words); 
-double Avg_W_L = (double) words/lines ; 
-//System.out.println("Average Words/Line =" + Avg_W_L);
-LineNumberReader LReader = new LineNumberReader(new FileReader(new File (inputChooser.getSelectedFile().getAbsolutePath())));
-int counter = 0 ; 
-String EmptyLine = null;
-while ((EmptyLine= LReader.readLine())!= null) {
-if (EmptyLine.length()==0) {
-	counter++;
-}
-		//Done here.
-}
-textField.setText("Words:   " + words + "        Lines:   "
-		+ lines + "       Blank Lines Removed:   " + counter 
-		+ "    "+"\n" + "(Avg Words/Line):   " + Avg_L_L
-				+ "  (Avg Line length): " + Avg_W_L);
-		LReader.close();
-		//System.out.println("Blank Lines Removed : " + counter );
-			    } catch (FileNotFoundException evt) {
-			        evt.printStackTrace();
-			    } catch (IOException e1) {
-					e1.printStackTrace();
-				}
+			        	//System.out.println ("Num of lines"+ lines);
+			        	StringTokenizer STokenizer = new StringTokenizer (empty);
+			        	words = STokenizer.countTokens();
+			        	BReader.close();
+			        	double chars = inputChooser.getSelectedFile().length();
+			        	double Avg_L_L = chars / lines ;
+			        	//System.out.println("Average Length is" + Avg_L_L );
+			        	//System.out.println("Word Counter:" + words); 
+			        	double Avg_W_L = (double) words/lines ; 
+			        	//System.out.println("Average Words/Line =" + Avg_W_L);
+			        	LineNumberReader LReader = new LineNumberReader(new FileReader(new File (inputChooser.getSelectedFile().getAbsolutePath())));
+			        	int counter = 0 ; 
+			        	String EmptyLine = null;
+			        	while ((EmptyLine= LReader.readLine())!= null) {
+			        		if (EmptyLine.length()==0) {
+			        			counter++;
+			        		}
+			        		//Done here.
+			        	}
+			        	textField.setText("Words:   " + words + "        Lines:   "
+			        			+ lines + "       Blank Lines Removed:   " + counter 
+			        			+ "    "+"\n" + "(Avg Words/Line):   " + Avg_L_L
+			        			+ "  (Avg Line length): " + Avg_W_L);
+			        	LReader.close();
+			        	//System.out.println("Blank Lines Removed : " + counter );
+					} catch (FileNotFoundException evt) {
+						evt.printStackTrace();
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}	
 				finally {
 					try {
 						writer.close();
@@ -237,6 +238,8 @@ textField.setText("Words:   " + words + "        Lines:   "
 		JButton btnNewButton_1 = new JButton("Right Justification");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				//tried many different codes and they all messed up the program, so
+				//we decided we will figure it out after the demonstration
 			}
 		});
 		
