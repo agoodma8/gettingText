@@ -71,10 +71,6 @@ public class gettingText {
 	frame.setTitle("Text Modifier");
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-  
-		//Selected File Labels
-		JLabel label1=new JLabel();
-		JLabel label2=new JLabel();
 		
 		//Input File Button
 		Button input = new Button("Select Input File\r\n");
@@ -240,25 +236,28 @@ textField.setText("Words:   " + words + "        Lines:   "
 		//textField.setFont(new Font("Dialog", Font.PLAIN, 9));
 		//textField.setText("Words:            Lines:          Blank Lines Removed:       "+"\n" + "(Avg Words/Line):     (Avg Line length): ");
 		
-		frame.setLayout(new GridLayout(7,1));
-		frame.add(input);
-		frame.add(label1);
-		frame.add(output);
-		frame.add(label2);
-		frame.add(format);
-		frame.add(textField);
+		frame.getContentPane().setLayout(new GridLayout(7,1));
+		frame.getContentPane().add(input);
+		frame.getContentPane().add(output);
+		
+		JButton btnNewButton = new JButton("Left Justification");
+		btnNewButton.setSize(50,50);
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		
+		JButton btnNewButton_1 = new JButton("Right Justification");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		frame.getContentPane().add(btnNewButton_1);
+		frame.getContentPane().add(btnNewButton);
+		frame.getContentPane().add(format);
+		frame.getContentPane().add(textField);
 
 		
 	}
 	
 }
-
-
-
-
-
-
-
-
-
-
