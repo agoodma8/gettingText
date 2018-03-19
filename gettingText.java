@@ -145,7 +145,9 @@ public class gettingText {
 			            	if(temp != null && (temp.length() + nextWord.length()+1 > max)){
 			            		//buff.append("\n");
 			            		//System.out.print(buff.toString()+ " ");
-			            		writer.write("\n" + buff.toString() + " ");
+			            		writer.newLine();
+			            		writer.write(buff.toString() + " ");
+			            		
 			            		buff=new StringBuffer(nextWord);
 			            		temp = buff;
 			            	}
@@ -160,7 +162,8 @@ public class gettingText {
 			            
 			            if (buff.length()>0) {
 			            	//System.out.print(buff.toString() + "\n");
-			            	writer.write(temp.toString() + "\n");
+			            	writer.write(buff.toString() + " ");
+			            	writer.newLine();
 			            	buff = new StringBuffer(max);
 			            }
 			            
