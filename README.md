@@ -21,4 +21,4 @@ To use this document, you need a Java IDE to run the project.
 ###Contirbution guidelines ###
 *Writing tests
 *Code review
-* Other guildelines
+*Other guildelines
