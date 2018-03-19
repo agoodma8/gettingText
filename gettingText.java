@@ -124,6 +124,7 @@ public class gettingText {
 		//Format Button
 		JLabel textField = new JLabel();
 		textField.setFont(new Font("Dialog", Font.PLAIN, 9));
+		textField.setText("Words:            Lines:          Blank Lines Removed:       "+"\n" + "(Avg Words/Line):     (Avg Line length): ");
 		Button format= new Button ("Format");
 		format.setBackground(Color.white);
 		format.setForeground(Color.black);
@@ -134,28 +135,40 @@ public class gettingText {
 					writer = new BufferedWriter(new FileWriter(newFile));
 					int max=80;
 					StringBuffer buff= new StringBuffer(max);
-			        while (scanner.hasNextLine()) {
+					StringBuffer temp = null;
+			        while (scanner.hasNextLine()) {	
 			            Scanner sc= new Scanner(scanner.nextLine());
+			            
 			            while (sc.hasNext()) {
-			            	String nextWord=sc.next();
-			            	if((buff.length()+ nextWord.length()+1 >max)){
-			            		buff.append('\n');
+			            	
+			            	String nextWord = sc.next();
+			            	if(temp != null && (temp.length() + nextWord.length()+1 > max)){
+			            		//buff.append("\n");
 			            		//System.out.print(buff.toString()+ " ");
-			            		writer.write(buff.toString() + " ");
+			            		writer.write("\n" + buff.toString() + " ");
 			            		buff=new StringBuffer(nextWord);
+			            		temp = buff;
 			            	}
 			            	else {
-			            		buff.append((buff.length()==0?"":"")+ nextWord);
-			            		writer.write(buff.toString() + " ");
-			            	}
+			            		
+			            		buff.append((buff.length()==0 ? "": "") + nextWord + " ");
+			            		temp = buff;
+			            
+			            		//writer.write(buff.toString() + " ");
+			            	} 
 			            }
+			            
 			            if (buff.length()>0) {
 			            	//System.out.print(buff.toString() + "\n");
-			            	writer.write(buff.toString() + "\n");
+			            	writer.write(temp.toString() + "\n");
+			            	buff = new StringBuffer(max);
 			            }
-			            sc.close();
+			            
+			           sc.close();
 			            
 			        }
+			        
+			        
 			        
 			        //Here Should be the saving part so the bottom calculation will be done to the output and we get the final result
 			        
@@ -165,7 +178,7 @@ public class gettingText {
 String line = "", empty = "";
 int words = 0;
 int lines = 0;
-FileReader FReader= new FileReader (outputChooser.getSelectedFile().getAbsolutePath());
+FileReader FReader= new FileReader (inputChooser.getSelectedFile().getAbsolutePath());
 BufferedReader BReader = new BufferedReader (FReader);
 while((line = BReader.readLine())!=null) {
 	empty += line + " ";
@@ -180,7 +193,7 @@ words = STokenizer.countTokens();
 	words++;
 }*/
 BReader.close();
-double chars = outputChooser.getSelectedFile().length();
+double chars = inputChooser.getSelectedFile().length();
 double Avg_L_L = chars / lines ;
 System.out.println("Average Length is" + Avg_L_L );
 System.out.println("Word Counter:" + words); 
