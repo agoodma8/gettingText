@@ -3,11 +3,11 @@ package gettingText;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.TextField;
+//import java.awt.TextField;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
+//import javax.swing.JPanel;
 import javax.swing.JFileChooser;
 import javax.swing.JButton;
 import java.awt.Button;
@@ -20,16 +20,16 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.LineNumberReader;
-import java.util.HashMap;
+//import java.util.HashMap;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 import java.awt.event.ActionEvent;
 import javax.swing.UIManager;
-import javax.swing.filechooser.FileFilter;
+//import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import java.awt.Color;
-import javax.swing.SwingConstants;
+//import javax.swing.SwingConstants;
 
 public class gettingText1 {
 
@@ -111,7 +111,7 @@ public class gettingText1 {
 				File file=outputChooser.getSelectedFile();
 				String name =file.getName();
 				label2.setText("Selected File: "+name);
-				//newFile = new File(name);
+			
 				
 			}
 		}
@@ -139,8 +139,7 @@ public class gettingText1 {
 			            	
 			            	String nextWord = sc.next();
 			            	if(temp != null && (temp.length() + nextWord.length()+1 > max)){
-			            		//buff.append("\n");
-			            		//System.out.print(buff.toString()+ " ");
+			            	
 			            		
 			            		writer.write(buff.toString() + " ");
 			            		writer.newLine();
@@ -152,15 +151,14 @@ public class gettingText1 {
 			            		buff.append((buff.length()==0 ? "": "") + nextWord + " ");
 			            		temp = buff;
 			            
-			            		//writer.write(buff.toString() + " ");
+			            		
 			            	} 
 			            }
 			            
-			            if (buff.length()>0) {
-			            	//System.out.print(buff.toString() + "\n");
+			            if (buff.length() > 0) {
+			            	
 			            	writer.write(buff.toString() + "");
-			            	//writer.newLine();
-			            	buff = new StringBuffer(max);
+			            	buff = new StringBuffer(max-temp.length());
 			            }
 			            
 			           sc.close();
@@ -169,7 +167,7 @@ public class gettingText1 {
 			        
 			        
 			        
-			        //Here Should be the saving part so the bottom calculation will be done to the output and we get the final result
+			       
 			        
 			        
 			        
@@ -184,20 +182,16 @@ while((line = BReader.readLine())!=null) {
 	lines ++ ;
 }
 
-System.out.println ("Num of lines"+ lines);
+//System.out.println ("Num of lines"+ lines);
 StringTokenizer STokenizer = new StringTokenizer (empty);
 words = STokenizer.countTokens();
-/*while (STokenizer.hasMoreTokens()) { //Count words
-	String something = STokenizer.nextToken();
-	words++;
-}*/
 BReader.close();
 double chars = inputChooser.getSelectedFile().length();
 double Avg_L_L = chars / lines ;
-System.out.println("Average Length is" + Avg_L_L );
-System.out.println("Word Counter:" + words); 
+//System.out.println("Average Length is" + Avg_L_L );
+//System.out.println("Word Counter:" + words); 
 double Avg_W_L = (double) words/lines ; 
-System.out.println("Average Words/Line =" + Avg_W_L);
+//System.out.println("Average Words/Line =" + Avg_W_L);
 LineNumberReader LReader = new LineNumberReader(new FileReader(new File (inputChooser.getSelectedFile().getAbsolutePath())));
 int counter = 0 ; 
 String EmptyLine = null;
@@ -212,7 +206,7 @@ textField.setText("Words:   " + words + "        Lines:   "
 		+ "    "+"\n" + "(Avg Words/Line):   " + Avg_L_L
 				+ "  (Avg Line length): " + Avg_W_L);
 		LReader.close();
-		System.out.println("Blank Lines Removed : " + counter );
+		//System.out.println("Blank Lines Removed : " + counter );
 			    } catch (FileNotFoundException evt) {
 			        evt.printStackTrace();
 			    } catch (IOException e1) {
@@ -231,18 +225,6 @@ textField.setText("Words:   " + words + "        Lines:   "
 			 }	
 		});
 		
-		//Statistics
-		//JLabel textField = new JLabel();
-		//textField.setFont(new Font("Dialog", Font.PLAIN, 9));
-		//textField.setText("Words:            Lines:          Blank Lines Removed:       "+"\n" + "(Avg Words/Line):     (Avg Line length): ");
-		
-		frame.getContentPane().setLayout(new GridLayout(9,1));
-		frame.getContentPane().add(input);
-		frame.getContentPane().add(label1);
-		frame.getContentPane().add(output);
-		frame.getContentPane().add(label2);
-		
-		
 		JButton btnNewButton = new JButton("Left Justification");
 		btnNewButton.setSize(50,50);
 		btnNewButton.addActionListener(new ActionListener() {
@@ -255,6 +237,13 @@ textField.setText("Words:   " + words + "        Lines:   "
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
+		
+		
+		frame.getContentPane().setLayout(new GridLayout(9,1));
+		frame.getContentPane().add(input);
+		frame.getContentPane().add(label1);
+		frame.getContentPane().add(output);
+		frame.getContentPane().add(label2);
 		frame.getContentPane().add(btnNewButton_1);
 		frame.getContentPane().add(btnNewButton);
 		frame.getContentPane().add(format);
