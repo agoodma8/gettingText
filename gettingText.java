@@ -150,10 +150,12 @@ public class gettingText1 {
 			            		
 			            		buff.append((buff.length()==0 ? "": "") + nextWord + " ");
 			            		temp = buff;
-			            
+			            		
+			            		
 			            		
 			            	} 
 			            }
+			            
 			            
 			            if (buff.length() > 0) {
 			            	
