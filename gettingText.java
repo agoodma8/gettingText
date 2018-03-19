@@ -1,5 +1,4 @@
-
-package textModifier;
+package gettingText;
 
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -13,13 +12,17 @@ import javax.swing.JFileChooser;
 import javax.swing.JButton;
 import java.awt.Button;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.LineNumberReader;
+import java.util.HashMap;
 import java.util.Scanner;
+import java.util.StringTokenizer;
 import java.awt.event.ActionEvent;
 import javax.swing.UIManager;
 import javax.swing.filechooser.FileFilter;
@@ -33,6 +36,8 @@ public class gettingText {
 	private JFrame frame;
 	final JFileChooser inputChooser = new JFileChooser();
 	final JFileChooser outputChooser= new JFileChooser();
+	BufferedWriter writer =null;
+	File newFile = null;
 
 	/**
 	 * Launch the application.
@@ -95,6 +100,7 @@ public class gettingText {
 		
 		//Output File Button
 		Button output = new Button("Select Output File\r\n");
+		
 		output.setBackground(Color.WHITE);
 		output.setForeground(Color.BLACK);
 		output.setFont(UIManager.getFont("FileChooser.listFont"));
@@ -107,19 +113,25 @@ public class gettingText {
 			int returnVal= outputChooser.showOpenDialog(null);
 			if (returnVal==JFileChooser.APPROVE_OPTION) {
 				File file=outputChooser.getSelectedFile();
-				String name=file.getName();
+				String name =file.getName();
 				label2.setText("Selected File: "+name);
+				//newFile = new File(name);
+				
 			}
 		}
 		});
 		
 		//Format Button
+		JLabel textField = new JLabel();
+		textField.setFont(new Font("Dialog", Font.PLAIN, 9));
 		Button format= new Button ("Format");
 		format.setBackground(Color.white);
 		format.setForeground(Color.black);
 		format.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try (Scanner scanner = new Scanner(new File(inputChooser.getSelectedFile().getAbsolutePath()))) {
+					newFile = new File(outputChooser.getSelectedFile().getAbsolutePath());
+					writer = new BufferedWriter(new FileWriter(newFile));
 					int max=80;
 					StringBuffer buff= new StringBuffer(max);
 			        while (scanner.hasNextLine()) {
@@ -128,38 +140,89 @@ public class gettingText {
 			            	String nextWord=sc.next();
 			            	if((buff.length()+ nextWord.length()+1 >max)){
 			            		buff.append('\n');
-			            		System.out.print(buff.toString()+ " ");
+			            		//System.out.print(buff.toString()+ " ");
+			            		writer.write(buff.toString() + " ");
 			            		buff=new StringBuffer(nextWord);
 			            	}
 			            	else {
 			            		buff.append((buff.length()==0?"":"")+ nextWord);
+			            		writer.write(buff.toString() + " ");
 			            	}
 			            }
 			            if (buff.length()>0) {
-			            	System.out.print(buff.toString() + "\n");
+			            	//System.out.print(buff.toString() + "\n");
+			            	writer.write(buff.toString() + "\n");
 			            }
+			            sc.close();
+			            
 			        }
-BufferedWriter BWriter = null;
-FileWriter Fwriter= null;
-Fwriter= new FileWriter (inputChooser.getSelectedFile().getAbsolutePath());
-BWriter= new BufferedWriter (Fwriter);
-BWriter.write(buff.toString());
-if (BWriter!=null)
-	BWriter.close();
-if(Fwriter!=null)
-	Fwriter.close();
+			        
+			        //Here Should be the saving part so the bottom calculation will be done to the output and we get the final result
+			        
+			        
+			        
+//This Part is for counting Words + Lines . 
+String line = "", empty = "";
+int words = 0;
+int lines = 0;
+FileReader FReader= new FileReader (outputChooser.getSelectedFile().getAbsolutePath());
+BufferedReader BReader = new BufferedReader (FReader);
+while((line = BReader.readLine())!=null) {
+	empty += line + " ";
+	lines ++ ;
+}
+
+System.out.println ("Num of lines"+ lines);
+StringTokenizer STokenizer = new StringTokenizer (empty);
+words = STokenizer.countTokens();
+/*while (STokenizer.hasMoreTokens()) { //Count words
+	String something = STokenizer.nextToken();
+	words++;
+}*/
+BReader.close();
+double chars = outputChooser.getSelectedFile().length();
+double Avg_L_L = chars / lines ;
+System.out.println("Average Length is" + Avg_L_L );
+System.out.println("Word Counter:" + words); 
+double Avg_W_L = (double) words/lines ; 
+System.out.println("Average Words/Line =" + Avg_W_L);
+LineNumberReader LReader = new LineNumberReader(new FileReader(new File (inputChooser.getSelectedFile().getAbsolutePath())));
+int counter = 0 ; 
+String EmptyLine = null;
+while ((EmptyLine= LReader.readLine())!= null) {
+if (EmptyLine.length()==0) {
+	counter++;
+}
+		//Done here.
+}
+textField.setText("Words:   " + words + "        Lines:   "
+		+ lines + "       Blank Lines Removed:   " + counter 
+		+ "    "+"\n" + "(Avg Words/Line):   " + Avg_L_L
+				+ "  (Avg Line length): " + Avg_W_L);
+		LReader.close();
+		System.out.println("Blank Lines Removed : " + counter );
 			    } catch (FileNotFoundException evt) {
 			        evt.printStackTrace();
 			    } catch (IOException e1) {
 					e1.printStackTrace();
 				}
+				finally {
+					try {
+						writer.close();
+					} catch (FileNotFoundException ev) {
+				        ev.printStackTrace();
+				    } catch (IOException e2) {
+						e2.printStackTrace();
+					}
+					
+				}
 			 }	
 		});
 		
 		//Statistics
-		JLabel textField = new JLabel();
-		textField.setFont(new Font("Dialog", Font.PLAIN, 9));
-		textField.setText("Words:            Lines:          Blank Lines Removed:       "+"\n" + "(Avg Words/Line):     (Avg Line length): ");
+		//JLabel textField = new JLabel();
+		//textField.setFont(new Font("Dialog", Font.PLAIN, 9));
+		//textField.setText("Words:            Lines:          Blank Lines Removed:       "+"\n" + "(Avg Words/Line):     (Avg Line length): ");
 		
 		frame.setLayout(new GridLayout(7,1));
 		frame.add(input);
@@ -173,4 +236,13 @@ if(Fwriter!=null)
 	}
 	
 }
+
+
+
+
+
+
+
+
+
 
