@@ -1,4 +1,4 @@
-b# README #
+# README #
 
 Hello this is our first file for CSE350 team project. 
 This is our second commit.
